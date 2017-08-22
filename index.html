@@ -1,124 +1,135 @@
 <!DOCTYPE>
-<html><head><title>Calculadora</title></head><body>
+<html>
+<head>
+	<title>Calculadora</title>
+</head>
+<body>
 	<script type="text/javascript">
+	document.getElementById('campo').disabled = true;
+
 	<!--
-	var Accum = 0;
-	var FlagNewNum = false;
-	var PendingOp = "";
+	var acum = 0;
+	var numeroNovo = false;
+	var operacaoPendente = "";
 	//Abaixo estamos adcionando os valores de cada botão ao parametro Num
-	function numeroPressionado(Num) {
-		if (FlagNewNum) {
-			document.frm_calc.txt_01.value  = Num;
-			FlagNewNum = false;
-		}
-		else {
-			if (document.frm_calc.txt_01.value == "0")
-			document.frm_calc.txt_01.value = Num;
-			else
-			document.frm_calc.txt_01.value += Num;
+	function numeroPressionado(numero) {
+		if(numeroNovo){
+			document.formulario.texto.value = numero;
+			numeroNovo = false;
+		}	else {
+			if (document.formulario.texto.value == "0") {
+				document.formulario.texto.value = numero;
+			} else {
+				document.formulario.texto.value += numero;
+			}
 		}
 	}
+
 	//Valores de exibição quando apertado o botão igual
-	function operacao(Op) {
-		if (document.frm_calc.txt_01.value == ""){
+	function operacao(operacao) {
+		if (document.formulario.texto.value == ""){
 			alert("O Campo esta vázio digite um valor");
-			document.frm_calc.txt_01.value ="0"; }
+			document.formulario.texto.value ="0"; }
 			else{
-				if (FlagNewNum && PendingOp != "=");
+				if (numeroNovo && operacaoPendente != "=");
 				else	{
-					FlagNewNum = true;
-					if ( '+' == PendingOp )
-					Accum += parseFloat(document.frm_calc.txt_01.value);
-					else if ( '-' == PendingOp )
-					Accum -= parseFloat(document.frm_calc.txt_01.value);
-					else if ( '/' == PendingOp )
-					Accum /= parseFloat(document.frm_calc.txt_01.value);
-					else if ( '*' == PendingOp )
-					Accum *= parseFloat(document.frm_calc.txt_01.value);
+					numeroNovo = true;
+					if ( '+' == operacaoPendente )
+					acum += parseFloat(document.formulario.texto.value);
+					else if ( '-' == operacaoPendente )
+					acum -= parseFloat(document.formulario.texto.value);
+					else if ( '/' == operacaoPendente )
+					acum /= parseFloat(document.formulario.texto.value);
+					else if ( '*' == operacaoPendente )
+					acum *= parseFloat(document.formulario.texto.value);
 					else
-					Accum = parseFloat(document.frm_calc.txt_01.value);
-					document.frm_calc.txt_01.value = Accum;
-					PendingOp = Op;
+					acum = parseFloat(document.formulario.texto.value);
+					document.formulario.texto.value = acum;
+					operacaoPendente = operacao;
 				}
 			}
 		}
 		//Atribuindo o ponto( . ) aos valores numéricos
 		function Ponto() {
-			var curtxt_01 = document.frm_calc.txt_01.value;
-			if (FlagNewNum) {
+			var curtxt_01 = document.formulario.texto.value;
+			if (numeroNovo) {
 				curtxt_01 = "0.";
-				FlagNewNum = false;
+				numeroNovo = false;
 			}
 			else {
 				if (curtxt_01.indexOf(".") == -1)
 				curtxt_01 += ".";
 			}
-			document.frm_calc.txt_01.value = curtxt_01;
+			document.formulario.texto.value = curtxt_01;
 		}
 		-->
 		</script>
 
 		<style>
-			table {
-				color: #4c2828;
-				background-color: #e4d6d6;
-				border: 1.5px solid #4c2828;
-			}
+		table {
+			color: #4c2828;
+			background-color: #e4d6d6;
+			border: 1.5px solid #4c2828;
+		}
 
-			.celula {
-				color: #4c2828;
-				background-color: #e4d6d6;
-				cursor: hand;
-				padding: 9px;
-				border: 1px solid black;
-			}
+		.celula {
+			color: #4c2828;
+			background-color: #e4d6d6;
+			cursor: hand;
+			padding: 9px;
+			border: 1px solid black;
+		}
 
-			.titulo-tabela{
-				align-items: center;
-				background-color: #e4d6d6;
-				font-family: verdana;
-			}
+		.titulo-tabela{
+			align-items: center;
+			background-color: #e4d6d6;
+			font-family: verdana;
+		}
 
-			.input-default{
-				color:#000000;
-				background-color: #e4d6d6;
-				border: 1.5px solid #4c2828;
-			}
+		.input-default{
+			color:#000000;
+			background-color: #e4d6d6;
+			border: 1.5px solid #4c2828;
+		}
+
+		.td {
+			align-items: center;
+			border: 1px solid #FFB90F;
+		}
 		</style>
 
-		<form name="frm_calc" acton>
-			<center>
-				<table width="200" cellpadding="3" cellspacing="5">
-					<tr>
-						<td colspan="5" class="titulo-tabela"><b>Calculadora</b></font></td>
-						</tr>
-						<tr>
-							<td colspan="3" align="center" border:2pt solid#FFB90F><input type="text" name="txt_01" value="0" class="input-default"></td>
-							<td><center><input type="reset" value="AC" onclick="" class="celula"></center></td>
-							<td><center><input type="button" value="=" name="botao_igual" onclick="operacao('=')" class="celula"></center></td>
-						</tr>
-						<tr>
-							<td><center><input type="button" value="7" name="botao_7" onclick="numeroPressionado(7)" class="celula"></center></td>
-							<td><center><input type="button" value="8" name="botao_8" onclick="numeroPressionado(8)" class="celula"></center></td>
-							<td><center><input type="button" value="9" name="botao_9" onclick="numeroPressionado(9)" class="celula"></center></td>
-							<td><center><input type="button" value="+" name="botao_soma" onclick="operacao('+')" class="celula"></center></td>
-							<td><center><input type="button" value="-" name="botao_subt" onclick="operacao('-')" class="celula"></center></td>
-						</tr>
-						<tr>
-							<td><center><input type="button" value="4" name="botao_4" onclick="numeroPressionado(4)" class="celula"></center></td>
-							<td><center><input type="button" value="5" name="botao_5" onclick="numeroPressionado(5)" class="celula"></center></td>
-							<td><center><input type="button" value="6" name="botao_6" onclick="numeroPressionado(6)" class="celula"></center></td>
-							<td><center><input type="button" value="*" name="botao_mult" onclick="operacao('*')" class="celula"></center></td>
-							<td><center><input type="button" value="/" name="botao_divi" onclick="operacao('/')" class="celula"></center></td>
-						</tr>
-						<tr>
-							<td><center><input type="button" value="1" name="botao_1" onclick="numeroPressionado(1)" class="celula"></center></td>
-							<td><center><input type="button" value="2" name="botao_2" onclick="numeroPressionado(2)" class="celula"></center></td>
-							<td><center><input type="button" value="3" name="botao_3" onclick="numeroPressionado(3)" class="celula"></center></td>
-							<td><center><input type="button" value="0" name="botao_0" onclick="numeroPressionado(0)" class="celula"></center></td>
-							<td><center><input type="button" value="." name="botao_pont" onclick="Ponto()" class="celula"></center></td>
-						</tr>
-					</table>
-				</form></center>
-			</body>
-			</html>
+		<form name="formulario" acton>
+			<table width="200" cellpadding="3" cellspacing="5">
+				<tr>
+					<td colspan="5" class="titulo-tabela"><b>Calculadora</b></font></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input id="campo" type="text" name="texto" value="0" class="input-default" onkeydown="return false;"></td>
+					<td><input type="reset" value="AC" onclick="" class="celula"></center></td>
+					<td><input type="button" value="=" name="botao_igual" onclick="operacao('=')" class="celula"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="7" name="botao_7" onclick="numeroPressionado(7)" class="celula"></td>
+					<td><input type="button" value="8" name="botao_8" onclick="numeroPressionado(8)" class="celula"></td>
+					<td><input type="button" value="9" name="botao_9" onclick="numeroPressionado(9)" class="celula"></td>
+					<td><input type="button" value="+" name="botao_soma" onclick="operacao('+')" class="celula"></td>
+					<td><input type="button" value="-" name="botao_subt" onclick="operacao('-')" class="celula"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="4" name="botao_4" onclick="numeroPressionado(4)" class="celula"></td>
+					<td><input type="button" value="5" name="botao_5" onclick="numeroPressionado(5)" class="celula"></td>
+					<td><input type="button" value="6" name="botao_6" onclick="numeroPressionado(6)" class="celula"></td>
+					<td><input type="button" value="*" name="botao_mult" onclick="operacao('*')" class="celula"></td>
+					<td><input type="button" value="/" name="botao_divi" onclick="operacao('/')" class="celula"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="1" name="botao_1" onclick="numeroPressionado(1)" class="celula"></td>
+					<td><input type="button" value="2" name="botao_2" onclick="numeroPressionado(2)" class="celula"></td>
+					<td><input type="button" value="3" name="botao_3" onclick="numeroPressionado(3)" class="celula"></td>
+					<td><input type="button" value="0" name="botao_0" onclick="numeroPressionado(0)" class="celula"></td>
+					<td><input type="button" value="." name="botao_pont" onclick="Ponto()" class="celula"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+	</html>
