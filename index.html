@@ -7,11 +7,10 @@
 	<script type="text/javascript">
 	document.getElementById('campo').disabled = true;
 
-	<!--
 	var acum = 0;
 	var numeroNovo = false;
 	var operacaoPendente = "";
-	//Abaixo estamos adcionando os valores de cada botão ao parametro Num
+
 	function numeroPressionado(numero) {
 		if(numeroNovo){
 			document.formulario.texto.value = numero;
@@ -25,7 +24,6 @@
 		}
 	}
 
-	//Valores de exibição quando apertado o botão igual
 	function operacao(operacao) {
 		if (document.formulario.texto.value == ""){
 			alert("O Campo esta vázio digite um valor");
@@ -49,8 +47,8 @@
 				}
 			}
 		}
-		//Atribuindo o ponto( . ) aos valores numéricos
-		function Ponto() {
+
+		function ponto() {
 			var curtxt_01 = document.formulario.texto.value;
 			if (numeroNovo) {
 				curtxt_01 = "0.";
@@ -62,7 +60,14 @@
 			}
 			document.formulario.texto.value = curtxt_01;
 		}
-		-->
+
+		function limpar() {
+			document.formulario.texto.value = "";
+			acum = 0;
+			numeroNovo = false;
+			operacaoPendente = "";
+		}
+
 		</script>
 
 		<style>
@@ -78,6 +83,7 @@
 			cursor: hand;
 			padding: 9px;
 			border: 1px solid black;
+			text-align: center;
 		}
 
 		.titulo-tabela{
@@ -88,6 +94,8 @@
 
 		.input-default{
 			color:#000000;
+			padding: 9px;
+			text-align: center;
 			background-color: #e4d6d6;
 			border: 1.5px solid #4c2828;
 		}
@@ -105,29 +113,29 @@
 				</tr>
 				<tr>
 					<td colspan="3"><input id="campo" type="text" name="texto" value="0" class="input-default" onkeydown="return false;"></td>
-					<td><input type="reset" value="AC" onclick="" class="celula"></center></td>
-					<td><input type="button" value="=" name="botao_igual" onclick="operacao('=')" class="celula"></td>
+					<td><div value="AC" onclick="limpar()" class="celula">AC</div></td>
+					<td><div value="=" name="botao_igual" onclick="operacao('=')" class="celula">=</div></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="7" name="botao_7" onclick="numeroPressionado(7)" class="celula"></td>
-					<td><input type="button" value="8" name="botao_8" onclick="numeroPressionado(8)" class="celula"></td>
-					<td><input type="button" value="9" name="botao_9" onclick="numeroPressionado(9)" class="celula"></td>
-					<td><input type="button" value="+" name="botao_soma" onclick="operacao('+')" class="celula"></td>
-					<td><input type="button" value="-" name="botao_subt" onclick="operacao('-')" class="celula"></td>
+					<td><div value="7" name="botao_7" onclick="numeroPressionado(7)" class="celula">7</div></td>
+					<td><div value="8" name="botao_8" onclick="numeroPressionado(8)" class="celula">8</div></td>
+					<td><div value="9" name="botao_9" onclick="numeroPressionado(9)" class="celula">9</div></td>
+					<td><div value="+" name="botao_soma" onclick="operacao('+')" class="celula">+</div></td>
+					<td><div value="-" name="botao_subt" onclick="operacao('-')" class="celula">-</div></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="4" name="botao_4" onclick="numeroPressionado(4)" class="celula"></td>
-					<td><input type="button" value="5" name="botao_5" onclick="numeroPressionado(5)" class="celula"></td>
-					<td><input type="button" value="6" name="botao_6" onclick="numeroPressionado(6)" class="celula"></td>
-					<td><input type="button" value="*" name="botao_mult" onclick="operacao('*')" class="celula"></td>
-					<td><input type="button" value="/" name="botao_divi" onclick="operacao('/')" class="celula"></td>
+					<td><div value="4" name="botao_4" onclick="numeroPressionado(4)" class="celula">4</div></td>
+					<td><div value="5" name="botao_5" onclick="numeroPressionado(5)" class="celula">5</div></td>
+					<td><div value="6" name="botao_6" onclick="numeroPressionado(6)" class="celula">6</div></td>
+					<td><div value="*" name="botao_mult" onclick="operacao('*')" class="celula">*</div></td>
+					<td><div value="/" name="botao_divi" onclick="operacao('/')" class="celula">/</div></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="1" name="botao_1" onclick="numeroPressionado(1)" class="celula"></td>
-					<td><input type="button" value="2" name="botao_2" onclick="numeroPressionado(2)" class="celula"></td>
-					<td><input type="button" value="3" name="botao_3" onclick="numeroPressionado(3)" class="celula"></td>
-					<td><input type="button" value="0" name="botao_0" onclick="numeroPressionado(0)" class="celula"></td>
-					<td><input type="button" value="." name="botao_pont" onclick="Ponto()" class="celula"></td>
+					<td><div value="1" name="botao_1" onclick="numeroPressionado(1)" class="celula">1</div></td>
+					<td><div value="2" name="botao_2" onclick="numeroPressionado(2)" class="celula">2</div></td>
+					<td><div value="3" name="botao_3" onclick="numeroPressionado(3)" class="celula">3</div></td>
+					<td><div value="0" name="botao_0" onclick="numeroPressionado(0)" class="celula">0</div></td>
+					<td><div value="." name="botao_pont" onclick="ponto()" class="celula">.</div></td>
 				</tr>
 			</table>
 		</form>
